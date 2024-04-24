@@ -29,5 +29,5 @@ jobs:
         context: .
         push: true
         file: docker/Dockerfile
-        tags: rickmoonen/thingsdb-test:debug
+        tags: rickmoonen/thingsdb-test:natomic
         platforms: linux/amd64
