@@ -89,6 +89,21 @@ struct ti_counters_s
                                     */
 };
 
+#ifdef NATOMIC
+#define ti_counters_garbage_collected() \
+    (counters_.garbage_collected)
+#define ti_counters_add_garbage_collected(n__) \
+    (counters_.garbage_collected += n__)
+#define ti_counters_zero_garbage_collected() \
+    (counters_.garbage_collected =  0)
+
+#define ti_counters_wasted_cache() \
+    (counters_.wasted_cache)
+#define ti_counters_inc_wasted_cache() \
+    (counters_.wasted_cache += 1)
+#define ti_counters_zero_wasted_cache() \
+    (counters_.wasted_cache = 0)
+#else
 #define ti_counters_garbage_collected() \
     (__atomic_load_n(&counters_.garbage_collected, __ATOMIC_SEQ_CST))
 #define ti_counters_add_garbage_collected(n__) \
@@ -102,4 +117,6 @@ struct ti_counters_s
     (__atomic_add_fetch(&counters_.wasted_cache, 1, __ATOMIC_SEQ_CST))
 #define ti_counters_zero_wasted_cache() \
     (__atomic_store_n(&counters_.wasted_cache, 0, __ATOMIC_SEQ_CST))
+#endif  /* NATOMIC */
+
 #endif  /* TI_COUNTERS_H_ */

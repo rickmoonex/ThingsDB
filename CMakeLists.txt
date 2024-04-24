@@ -18,6 +18,9 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
     add_compile_definitions(NDEBUG)
 endif()
 
+# Disable atomic counters
+add_compile_definitions(NATOMIC)
+
 # Set C11 standard
 set(CMAKE_C_STANDARD 11)
 
