@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-and-push-image:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
@@ -23,10 +23,4 @@ jobs:
         username: rickmoonen
         password: ${{ secrets.DOCKER_PAT }}
 
-    - uses: docker/setup-qemu-action@v3
-
-    - uses: docker/setup-buildx-action@v3
-      with:
-        version: v0.12.1
-
-    - run: docker buildx build --platform linux/amd64 --file docker/Dockerfile -t rickmoonen/thingsdb-test:manual --push .
+    - run: docker build --file docker/Dockerfile -t rickmoonen/thingsdb-test:manual --push .
