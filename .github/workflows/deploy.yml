@@ -23,4 +23,11 @@ jobs:
         username: rickmoonen
         password: ${{ secrets.DOCKER_PAT }}
 
-    - run: docker build --file docker/Dockerfile -t rickmoonen/thingsdb-test:manual --push .
+    - name: Build and push Docker image (minimal)
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        file: docker/Dockerfile
+        tags: rickmoonen/thingsdb-test:platform
+        platforms: linux/amd64
