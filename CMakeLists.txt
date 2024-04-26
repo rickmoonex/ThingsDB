@@ -8,6 +8,8 @@ cmake_minimum_required(VERSION 3.13)
 project(thingsdb C)
 include_directories(inc)
 
+message("System arch: ${CMAKE_SYSTEM_PROCESSOR}")
+message("System OS: ${CMAKE_SYSTEM_NAME}")
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
