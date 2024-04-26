@@ -31,3 +31,4 @@ jobs:
         file: docker/Dockerfile
         tags: rickmoonen/thingsdb-test:platform
         platforms: linux/amd64
+        cache-from: type=none
