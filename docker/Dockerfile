@@ -11,7 +11,11 @@ RUN apk update && \
     cmake -DCMAKE_BUILD_TYPE=Debug . && \
     make
 
-COPY /tmp/thingsdb/thingsdb /usr/local/bin/
+FROM alpine:latest
+RUN apk update && \
+    apk add pcre2 libuv yajl curl tzdata && \
+    mkdir -p /var/lib/thingsdb
+COPY --from=0 /tmp/thingsdb/thingsdb /usr/local/bin/
 
 # Volume mounts
 VOLUME ["/data"]
